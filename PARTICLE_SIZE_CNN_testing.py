@@ -40,19 +40,7 @@ def mean_relative_error(y_true , y_pred):
 
 
 def CNNmodel1(input_shape = (64,1), classes = 128):
-    """
-    Implementation of the popular ResNet50 the following architecture:
-    CONV2D -> BATCHNORM -> RELU -> MAXPOOL -> CONVBLOCK -> IDBLOCK*2 -> CONVBLOCK -> IDBLOCK*3
-    -> CONVBLOCK -> IDBLOCK*5 -> CONVBLOCK -> IDBLOCK*2 -> AVGPOOL -> TOPLAYER
 
-    Arguments:
-    input_shape -- shape of the images of the dataset
-    classes -- integer, number of classes
-
-    Returns:
-    model -- a Model() instance in Keras
-    """
-    
  
     
     X_input = Input(input_shape)
@@ -406,7 +394,6 @@ if Ref_data:
     ax[1].plot(sampled_RF, ref,color = 'blue',alpha = 1, linewidth=1.2); ax[1].set_title('HSI-inferred particle size')
     ax[1].tick_params(axis='both', which='major', labelsize=15);
     ax[1].set_xlabel('Particle size (\u03BCm )');
-#        ax[1].set_ylabel('Dpeth (cm)')
     ax[0].plot(sampling, ref,color = 'black',linewidth=1); ax[0].set_title('Reference Grain size')  
     ax[0].plot( savgol_filter(sampleTest_RF_high, 15, 3), y,color = 'orange', alpha = 0.8, linewidth=1);
     ax[0].tick_params(axis='both', which='major', labelsize=15)
