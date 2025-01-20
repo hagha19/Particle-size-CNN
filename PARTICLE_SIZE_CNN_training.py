@@ -39,21 +39,7 @@ def mean_relative_error(y_true , y_pred):
 
 
 def CNNmodel1(input_shape = (64,1), classes = 128):
-    """
-    Implementation of the popular ResNet50 the following architecture:
-    CONV2D -> BATCHNORM -> RELU -> MAXPOOL -> CONVBLOCK -> IDBLOCK*2 -> CONVBLOCK -> IDBLOCK*3
-    -> CONVBLOCK -> IDBLOCK*5 -> CONVBLOCK -> IDBLOCK*2 -> AVGPOOL -> TOPLAYER
 
-    Arguments:
-    input_shape -- shape of the images of the dataset
-    classes -- integer, number of classes
-
-    Returns:
-    model -- a Model() instance in Keras
-    """
-    
- 
-    
     X_input = Input(input_shape)
 
     X1 = Conv1D(16, 3, strides = 1, padding='same', name = 'conv0')(X_input)
@@ -416,14 +402,8 @@ Y_train = target#[target<thresh]
 
 ##########CNN
 print('building CNN regression')
-CNN_model = 1
-if CNN_model ==0:
-    model = RandomForestRegressor(n_estimators= 500)
-    model.fit(X_train, Y_train)
-else:
-    
-    model = CNNmodel1(input_shape = (64,1), classes = 64 )
-    model.compile(optimizer = 'Adam',  loss = 'mse')#,loss_weights=weights
+model = CNNmodel1(input_shape = (64,1), classes = 64 )
+model.compile(optimizer = 'Adam',  loss = 'mse')#,loss_weights=weights
 callback = tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=40, restore_best_weights=True)
 history = model.fit(x = X_train , y = Y_train  ,validation_data= (X_test , Y_test)  ,epochs = 200, batch_size = 64, shuffle = True, callbacks=[callback])# 
 plt.figure()
